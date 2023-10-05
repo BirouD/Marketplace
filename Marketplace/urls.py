@@ -20,6 +20,7 @@ from Marketplace import views
 
 urlpatterns = [
   path('admin/', admin.site.urls),
+  path("cadastro", views.cadastro, name = "cadastro"),
   path("", views.home, name = "homepage"),
   path("vendedor/", views.vendedor, name = "vendedor"),
   path("comprador/", views.comprador, name = "comprador"),
