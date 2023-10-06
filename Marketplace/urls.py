@@ -16,12 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
 from Marketplace import views
 
 urlpatterns = [
   path('admin/', admin.site.urls),
-  path("cadastro", views.cadastro, name = "cadastro"),
   path("", views.home, name = "homepage"),
+  path("cadastro/", views.cadastro, name = "cadastro"),
+  #path("cadastro/", include('cadastro.urls')),
   path("vendedor/", views.vendedor, name = "vendedor"),
   path("comprador/", views.comprador, name = "comprador"),
 ]

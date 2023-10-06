@@ -9,13 +9,36 @@
   </head>
 
   <body>
-    <h1>Selecione uma conta!</h1>
-    <form action='{% url 'vendedor' %}'>
+    <h1>Acessar conta</h1>
+    <!-- Formulário de Login -->
+    <form action='{% url 'homepage' %}'>  <!-- Entrar na conta -->
+      <label for="login">Login:</label><br>
+      <input type="text" id="login" name="login"><br>
+      <label for="senha">Senha:</label><br>
+      <input type="password" id="senha" name="senha"><br>
+      <label for="tipoUsuario">Tipo de Usuário:</label><br>
+      <select name="usuario" id="tipoUsuario">
+        <option value="Comprador"> Comprador</option>
+        <option value="Vendedor"> Vendedor</option>
+      </select>
+      <h1></h1>
+      <input type='submit' value='Entrar' class='btn btn-success'/>
+    </form>
+    <form action='{% url 'cadastro' %}'>
+      <input type='submit' value='Cadastar' class='btn btn-primary'/>
+    </form>
+    <!-- Fim do Formulário de Login -->
+
+
+    
+  <!--<form action='{% url 'vendedor' %}'>
       <input type='submit' value='Vendedor' class='btn btn-primary'/>
     </form>
     <form action='{% url 'comprador' %}'>
       <input type='submit' value='Comprador' class='btn btn-secondary'/>
     </form>
+  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
+
