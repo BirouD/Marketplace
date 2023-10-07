@@ -19,11 +19,13 @@ from django.urls import path
 from django.urls.conf import include
 from Marketplace import views
 
+app_name = "marketplace"
+
 urlpatterns = [
   path('admin/', admin.site.urls),
   path("", views.home, name = "homepage"),
-  path("cadastro/", views.cadastro, name = "cadastro"),
-  #path("cadastro/", include('cadastro.urls')),
+  path("cadastro/", views.MpPessoaCreateView.as_view(), name = "cadastro"),
   path("vendedor/", views.vendedor, name = "vendedor"),
-  path("comprador/", views.comprador, name = "comprador"),
+  path("comprador/", views.MpMercadoriaListView.as_view(), name = "comprador"),
+  path("novaMercadoria/", views.MpMercadoriaCreateView.as_view(), name = "novaMercadoria")
 ]

@@ -15,14 +15,17 @@
     <form action='{% url 'homepage' %}'>
       <label for="nome">Nome:</label><br>
       <input type="text" id="nome" name="nome"><br>
+
       <label for="login">Login:</label><br>
       <input type="text" id="login" name="login"><br>
+
       <label for="senha">Senha:</label><br>
       <input type="password" id="senha" name="senha"><br>
+      
       <label for="tipoUsuario">Tipo de Usuário:</label><br>
       <select name="usuario" id="tipoUsuario">
-        <option value="Comprador"> Comprador</option>
-        <option value="Vendedor"> Vendedor</option>
+        <option value="comprador"> Comprador</option>
+        <option value="vendedor"> Vendedor</option>
       </select>
       <h1></h1>
       <input type='submit' value='Confirmar' class='btn btn-success'/>
