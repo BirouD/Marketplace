@@ -17,8 +17,8 @@
       {% for mercadoria in mercadorias %}
         <tr>
           <td>{{ mercadoria.nome }}</td><td>{{ mercadoria.categoria }}</td><td>{{ mercadoria.fabricacao }}</td><td>{{ mercadoria.validade }}</td><td>{{ mercadoria.preco }}</td>
-          <td><a href="{% url 'mercadoria:atualiza-mercadoria' pk=mercadoria.id %}">Atualizar</a>
-            <a href="{% url 'mercadoria:exclui-mercadoria' pk=mercadoria.id %}">Excluir</a>
+          <td><a href="{% url 'Marketplace:atualiza-mercadoria' pk=mercadoria.id %}">Atualizar</a>
+            <a href="{% url 'Marketplace:exclui-mercadoria' pk=mercadoria.id %}">Excluir</a>
           </td>
         </tr>
       {% empty %}

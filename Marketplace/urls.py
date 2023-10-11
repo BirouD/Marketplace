@@ -17,7 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls.base import reverse_lazy
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.models import User
 from Marketplace import views
+from Marketplace.views import *
+from . import views
 
 app_name = "marketplace"
 
@@ -27,5 +33,14 @@ urlpatterns = [
   path("cadastro/", views.MpPessoaCreateView.as_view(), name = "cadastro"),
   path("vendedor/", views.vendedor, name = "vendedor"),
   path("comprador/", views.MpMercadoriaListView.as_view(), name = "comprador"),
-  path("novaMercadoria/", views.MpMercadoriaCreateView.as_view(), name = "novaMercadoria")
+  path("novaMercadoria/", views.MpMercadoriaCreateView.as_view(), name = "novaMercadoria"),
+  path('seguranca/', views.homeSec, name='sec-home'),
+  path('seguranca/seguranca/', views.registro, name='sec-registro'),
+  path('seguranca/login/', LoginView.as_view(template_name='seguranca/login.html',), name='sec-login'),
+  path('seguranca/profile/', views.paginaSecreta, name='sec-paginaSecreta'),
+  path('logout/', LogoutView.as_view(next_page=reverse_lazy('sec-home'),), name='sec-logout'),
+  #path('seguranca/terminaRegistro/<int:pk>/', UpdateView.as_view(template_name='seguranca/user_form.html', success_url=reverse_lazy('sec-home'), model=User, fields=['first_name',
+  #                                                                                                                                                                   'last_name',
+  #                                                                                                                                                                  ], ), name='sec-completaDadosUsuario'),
+  #path('seguranca/login', MeuUpdateView.as_view(template_name='seguranca/login.html'), nome='sec-completaDadosUsuario'),
 ]

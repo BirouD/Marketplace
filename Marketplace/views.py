@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.base import View
+from django.views.generic.edit import UpdateView
 from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 from Marketplace.models import *
 from Marketplace.forms import *
 
@@ -21,6 +24,40 @@ def cadastro(request):       #TELA cadastro que direciona para o Home/Login
 
 def novaMercadoria(request): #TELA de cadastro de mercadorias
   return render(request, 'Marketplace/novaMercadoria.html')
+
+def homeSec(request):
+  return render(request, 'seguranca/homeSec.html')
+
+def registro(request):
+  if request.method == 'POST':
+    formulario = UserCreationForm(request.POST)
+    if formulario.is_valid():
+      formulario.save()
+      return redirect('sec-home')
+    
+  else:
+    formulario = UserCreationForm()
+  context = {'form': formulario, }
+  return render(request, 'seguranca/registro.html', context)
+
+def testaAcesso(user):
+  # coloque aqui os testes que você precisar
+  if user.has_perm('contatos.change_pessoa'):
+    return True
+  else:
+    return False
+
+#@login_required !!!!!DESCOMENTAR AO JUNTAR COM O BD!!!!!
+#@user_passes_test ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+def paginaSecreta(request):
+  return render(request, 'seguranca/paginaSecreta.html')
+
+class MeuUpdateView(UpdateView):
+  def get(self, request, pk, *args, **kwargs):
+    if request.user.id == pk:
+      return super().get(request, pk, args, kwargs)
+    else:
+      return redirect('sec-home')
 
 #Pessoa
 class MpPessoaCreateView(View):
