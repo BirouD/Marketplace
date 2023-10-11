@@ -13,30 +13,22 @@ from Marketplace.forms import *
 def home(request):           #TELA LOGIN/SIGN
   return render(request, 'Marketplace/home.html')
 
-def vendedor(request):       #TELA VEDENDOR
-  return render(request, 'Marketplace/vendedor.html')
-
-def comprador(request):      #TELA COMPRADOR
-  return render(request, 'Marketplace/comprador.html')
-
-def cadastro(request):       #TELA cadastro que direciona para o Home/Login
-  return render(request, 'Marketplace/cadastro.html')
-
 def novaMercadoria(request): #TELA de cadastro de mercadorias
   return render(request, 'Marketplace/novaMercadoria.html')
 
-def homeSec(request):
-  return render(request, 'seguranca/homeSec.html')
+def login(request):
+  return render(request, 'login/login.html')
 
-def registro(request):
+def cadastro(request):
   if request.method == 'POST':
     formulario = UserCreationForm(request.POST)
     if formulario.is_valid():
       formulario.save()
-      return redirect('sec-home')
+      return redirect('homepage')
     
   else:
     formulario = UserCreationForm()
+
   context = {'form': formulario, }
   return render(request, 'seguranca/registro.html', context)
 
@@ -52,12 +44,18 @@ def testaAcesso(user):
 def paginaSecreta(request):
   return render(request, 'seguranca/paginaSecreta.html')
 
+def vendedor(request):       #TELA VEDENDOR
+  return render(request, 'Marketplace/vendedor.html')
+
+def comprador(request):      #TELA COMPRADOR
+  return render(request, 'Marketplace/comprador.html')
+#esses dois vai ter o esquema da paginaSecreta
 class MeuUpdateView(UpdateView):
   def get(self, request, pk, *args, **kwargs):
     if request.user.id == pk:
       return super().get(request, pk, args, kwargs)
     else:
-      return redirect('sec-home')
+      return redirect('homepage')
 
 #Pessoa
 class MpPessoaCreateView(View):
